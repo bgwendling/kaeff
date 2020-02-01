@@ -1,10 +1,13 @@
 ﻿using Assets.Scripts.Object_interaction;
+using Assets.Scripts.Object_interaction.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Cup : MonoBehaviour, IDraggable
 {
+    public ICoffee Coffee { get; set; }
+
     public void OnSelect()
     {
         Debug.Log("Cup object clicked");
@@ -22,7 +25,13 @@ public class Cup : MonoBehaviour, IDraggable
             if (hitInfo.transform.gameObject.tag.Equals("CoffeeMachine"))
             {
                 var cMachine = hitInfo.transform.gameObject;
-                cMachine.GetComponent<IMachine>().OnDropObject(gameObject);
+                cMachine.GetComponent<IMachine>().OnDropObject(gameObject, this);
+                //Debug.Log("Hit object:" + hitInfo.transform.gameObject.name);
+            }
+            if (hitInfo.transform.gameObject.tag.Equals("Character"))
+            {
+                var cMachine = hitInfo.transform.gameObject;
+                //cMachine.GetComponent<ICharacter>().OnDropObject(gameObject, this);
                 //Debug.Log("Hit object:" + hitInfo.transform.gameObject.name);
             }
         }

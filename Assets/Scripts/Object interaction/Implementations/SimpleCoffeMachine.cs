@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class SimpleCoffeMachine : MonoBehaviour, IMachine
 {
-    public void OnDropObject(GameObject dropped)
+    public void OnDropObject(GameObject dropped, IDraggable draggable)
     {
-        Debug.Log(dropped.name + " dropped onto: " + gameObject.name);
+        draggable.Coffee = new BlackCoffee();
+        Debug.Log(dropped.name + " dropped onto: " + gameObject.name + '\n' +
+            "The " + dropped.name + " now contains " + draggable.Coffee.Name);
         //throw new System.NotImplementedException();
     }
 

@@ -8,6 +8,6 @@ namespace Assets.Scripts.Object_interaction
         /// When you drop an object on top of the machine
         /// </summary>
         /// <param name="dropped">the object being dropped</param>
-        void OnDropObject(GameObject dropped);
+        void OnDropObject(GameObject dropped, IDraggable draggable);
     }
 }
