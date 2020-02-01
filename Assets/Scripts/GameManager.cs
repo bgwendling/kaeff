@@ -1,17 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private static object threadLock = new object();
+    private static readonly object threadLock = new object();
     [SerializeField]
     private string currencyPrefix = "Cash money flow:";
     [SerializeField]
     private Text CurrencyView;
     private float currency = 20.50f;
+
+    [SerializeField]
+    private List<GameObject> customers;
+    [SerializeField]
+    private List
 
     // Start is called before the first frame update
     void Start()

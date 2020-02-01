@@ -41,4 +41,9 @@ public class Cup : MonoBehaviour, IDraggable
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         //throw new System.NotImplementedException();
     }
+
+    void OnDisable()
+    {
+
+    }
 }

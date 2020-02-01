@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Serialization;
 
-[XmlRootAttribute("Behaviour")]
+[XmlRootAttribute("behaviour")]
 public class Behaviour
 {
-    public List<Speech> dialogueEntries;
+    public Speech[] speeches;
     [XmlAttribute]
     public string defaultMood;
+    [XmlAttribute]
+    public string name;
 }

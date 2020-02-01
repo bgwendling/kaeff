@@ -7,13 +7,21 @@ using System.IO;
 public class Character : MonoBehaviour
 {
     public TextAsset config;
-    public int id;
+    public Behaviour behaviour;
 
     List<coffeeWish> CoffeeWishes = new List<coffeeWish>();
     private int currentCoffeeWishIndex = 0;
 
-    public void Awake()
+    public void Start()
     {
+        var behaviourSerializer = new XmlSerializer(typeof(Behaviour));
+
+        using (TextReader reader = new StringReader(config.ToString()))
+        {
+            behaviour = (Behaviour)behaviourSerializer.Deserialize(reader);
+
+        }
+        int x = 5;
         CoffeeWishes.Add(new coffeeWish { coffeeType = typeof(BlackCoffee), payment = 4.20f });
     }
 
