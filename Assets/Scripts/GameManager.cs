@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void progress ()
+    IEnumerator progress()
     {
         Speech s = activeCharacter.talk();
         foreach(Entry statement in s.statements){
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
             //wait 20 seconds
             dialogueRoot.SetActive(false);
         }
+        yield return null;
     }
 
 
