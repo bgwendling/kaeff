@@ -1,0 +1,34 @@
+<Behaviour Name="Bear" defaultMood="HAPPY">
+    <Speech id=1>
+        <statements>
+            <!-- Hver entry her er ment å tilsvare en "snakkeboble"-->
+            <entry>
+                <text> Hei jeg er en bjørn</text>
+            </entry>
+            <entry>
+                 <moodChange>SAD</moodChange>
+                <text>Jeg bor i skogen</text>
+            </entry>
+            <!-- Eksempel der man kan velge et svar, og få forskjellig ny dialog ut i fra det  -->
+            <entry>
+              <text> Et spørsmål??</text>
+              <choice>
+                <option result=3>Hei</option>
+                <option result=4>Hei</option>
+              </choice>          
+            </entry>
+        </statements>
+    </Speech>
+    <!-- Ren monolog, ingen valg -->
+    <Speech id=2>
+        <statements>
+            <entry>
+                <text> Hei jeg er en bjørn</text>
+            </entry>
+            <entry>
+                 <moodChange>SAD</moodChange>
+                <text>Jeg bor i skogen</text>
+            </entry>
+        </statements>
+    </Speech>
+</Behaviour>
