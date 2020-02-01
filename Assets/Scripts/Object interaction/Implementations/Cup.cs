@@ -30,9 +30,10 @@ public class Cup : MonoBehaviour, IDraggable
             }
             if (hitInfo.transform.gameObject.tag.Equals("Character"))
             {
-                var cMachine = hitInfo.transform.gameObject;
-                //cMachine.GetComponent<ICharacter>().OnDropObject(gameObject, this);
-                //Debug.Log("Hit object:" + hitInfo.transform.gameObject.name);
+                var character = hitInfo.transform.gameObject;
+
+                character.GetComponent<Character>().OnReceiveObject(this);
+                Debug.Log(gameObject.name + "Dropped upon character:" + character.name + "\nThe cup contains:" + Coffee?.Name);
             }
         }
 

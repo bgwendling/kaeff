@@ -5,20 +5,38 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    private static object threadLock = new object();
+    [SerializeField]
+    private string currencyPrefix = "Cash money flow:";
     [SerializeField]
     private Text CurrencyView;
-    private float currency = 20f;
+    private float currency = 20.50f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        if (Instance == null)
+        {
+            lock (threadLock)
+            {
+                if (Instance == null)
+                {
+                    Instance = this;
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        CurrencyView.text = currencyPrefix + " " + currency.ToString("c2");
+        DontDestroyOnLoad(gameObject);
     }
 
     public void AddToCurrency(float ammount)
@@ -30,6 +48,6 @@ public class GameManager : MonoBehaviour
     {
         this.currency = currency;
         //update UI element displaying currency
-        CurrencyView.text = "Currency " + currency.ToString("#.##");
+        CurrencyView.text = currencyPrefix + " " + currency.ToString("#.##");
     }
 }
