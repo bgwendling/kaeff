@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 [XmlRootAttribute("behaviour")]
 public class Behaviour
 {
-    public Speech[] speeches;
+    public List<Speech> speeches;
     [XmlAttribute]
     public string defaultMood;
     [XmlAttribute]

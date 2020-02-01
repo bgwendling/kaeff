@@ -12,16 +12,25 @@ public class Character : MonoBehaviour
     List<coffeeWish> CoffeeWishes = new List<coffeeWish>();
     private int currentCoffeeWishIndex = 0;
 
-    public void Start()
+    private int lastSpeech = 0;
+
+    public Speech talk()
+    {
+        return behaviour.speeches[lastSpeech++];
+    }
+
+public void Awake()
     {
         var behaviourSerializer = new XmlSerializer(typeof(Behaviour));
 
         using (TextReader reader = new StringReader(config.ToString()))
         {
             behaviour = (Behaviour)behaviourSerializer.Deserialize(reader);
-
         }
-        int x = 5;
+    }
+
+    public void Start()
+    {
         CoffeeWishes.Add(new coffeeWish { coffeeType = typeof(BlackCoffee), payment = 4.20f });
     }
 

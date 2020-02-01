@@ -8,7 +8,7 @@ public class Speech
 {
     [XmlAttribute]
     public int id;
-    public Entry[] statements;
+    public List<Entry> statements;
 
 }
 
@@ -17,7 +17,7 @@ public class Entry
 {
     public string text;
     public string moodChange;
-    public Option[] choice;
+    public List<Option> choice;
 }
 
 [XmlType("option")]
