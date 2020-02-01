@@ -10,7 +10,12 @@ public class GameManager : MonoBehaviour
     private string currencyPrefix = "Cash money flow:";
     [SerializeField]
     private Text CurrencyView;
+    [SerializeField]
+    private Text dialogue;
+    private GameObject dialogueRoot;
     private float currency = 20.50f;
+    private GameObject activeCharacterObject;
+    private Character activeCharacter;
 
     [SerializeField]
     private List<GameObject> customers;
@@ -38,9 +43,44 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        initializeCustomers();
+        initializeAndHideDialogue();
         CurrencyView.text = currencyPrefix + " " + currency.ToString("c2");
         DontDestroyOnLoad(gameObject);
+    }
+
+
+    private void progress ()
+    {
+        Speech s = activeCharacter.talk();
+        foreach(Entry statement in s.statements){
+            dialogue.text = statement.text;
+            dialogueRoot.SetActive(true);
+            //wait 20 seconds
+            dialogueRoot.SetActive(false);
+        }
+    }
+
+
+    private void initializeAndHideDialogue()
+    {
+        dialogueRoot = getParent(getParent(dialogue));
+        dialogueRoot.SetActive(false);
+    }
+    private void initializeCustomers()
+    {
+        updateActiveCharacter(customers[0]);
+
+    }
+
+    private void updateActiveCharacter(GameObject obj)
+    {
+        foreach (GameObject o in customers)
+        {
+            o.SetActive(false);
+        }
+        obj.SetActive(true);
+        activeCharacter = customers[0].GetComponent<Character>();
     }
 
     public void AddToCurrency(float ammount)
@@ -52,6 +92,19 @@ public class GameManager : MonoBehaviour
     {
         this.currency = currency;
         //update UI element displaying currency
-        CurrencyView.text = currencyPrefix + " " + currency.ToString("#.##");
+        CurrencyView.text = currencyPrefix + " " + currency.ToString("c2");
     }
+
+
+    private static GameObject getParent(Text obj)
+    {
+        return obj.transform.parent.gameObject;
+    }
+
+
+    private static GameObject getParent(GameObject obj)
+    {
+        return obj.transform.parent.gameObject;
+    }
+
 }
