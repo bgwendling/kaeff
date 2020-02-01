@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Clickable
   - Draggable
+  - CoffeeMachine
   layers:
   - Default
   - TransparentFX

@@ -24,6 +24,8 @@ public class SelectObject : MonoBehaviour
                 {
                     selectedObject = hitInfo.transform.gameObject;
                     draggable = selectedObject.GetComponent(typeof(IDraggable)) as IDraggable;
+                    selectedObject.layer = 2; //Ignore raycast layer
+
                     distanceToDraggable = selectedObject.transform.position.z - Camera.main.transform.position.z;
                     draggable.OnSelect();
                    
@@ -42,6 +44,7 @@ public class SelectObject : MonoBehaviour
             if (selectedObject != null)
             {
                 draggable.OnUnselect();
+                selectedObject.layer = 0; //default layer
                 selectedObject = null;
             }
         }
