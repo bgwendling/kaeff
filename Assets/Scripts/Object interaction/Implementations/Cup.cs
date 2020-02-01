@@ -32,8 +32,8 @@ public class Cup : MonoBehaviour, IDraggable
         {
             if (hitInfo.transform.gameObject.tag.Equals("CoffeeMachine"))
             {
-                var cMachine = hitInfo.transform.gameObject;
-                cMachine.GetComponent<IMachine>().OnDropObject(gameObject, this);
+                var cMachine = hitInfo.transform.gameObject.GetComponent<IMachine>();
+                cMachine.OnDropObject(gameObject, this);
                 //Debug.Log("Hit object:" + hitInfo.transform.gameObject.name);
             }
             if (hitInfo.transform.gameObject.tag.Equals("Character"))
@@ -48,6 +48,18 @@ public class Cup : MonoBehaviour, IDraggable
 
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         //throw new System.NotImplementedException();
+    }
+
+    public void lockCup()
+    {
+        gameObject.tag = "Untagged";
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    public void unlockCup()
+{
+        gameObject.tag = "Draggable";
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
 
     void OnDisable()
