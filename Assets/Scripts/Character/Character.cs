@@ -30,11 +30,14 @@ public class Character : MonoBehaviour
 
     }
 
-    public void OnReceiveObject(IDraggable draggable)
+    public void OnReceiveObject(IDraggable draggable, GameObject gameObject)
     {
         if(draggable.Coffee?.GetType() == CoffeeWishes[currentCoffeeWishIndex].coffeeType)
         {
             GameManager.Instance.AddToCurrency(CoffeeWishes[currentCoffeeWishIndex].payment);
+            gameObject.SetActive(false);
+            gameObject.SetActive(true);
+
         }
     }
 

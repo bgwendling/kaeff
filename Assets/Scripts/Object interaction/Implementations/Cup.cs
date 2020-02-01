@@ -6,7 +6,15 @@ using UnityEngine;
 
 public class Cup : MonoBehaviour, IDraggable
 {
+
+    Vector3 originalPosition;
+
     public ICoffee Coffee { get; set; }
+
+    private void Start()
+    {
+        originalPosition = transform.position;
+    }
 
     public void OnSelect()
     {
@@ -32,7 +40,7 @@ public class Cup : MonoBehaviour, IDraggable
             {
                 var character = hitInfo.transform.gameObject;
 
-                character.GetComponent<Character>().OnReceiveObject(this);
+                character.GetComponent<Character>().OnReceiveObject(this, gameObject);
                 Debug.Log(gameObject.name + "Dropped upon character:" + character.name + "\nThe cup contains:" + Coffee?.Name);
             }
         }
@@ -44,6 +52,7 @@ public class Cup : MonoBehaviour, IDraggable
 
     void OnDisable()
     {
-
+        Coffee = null;
+        transform.position = originalPosition;
     }
 }

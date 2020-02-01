@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> customers;
-    [SerializeField]
-    private List
+    //[SerializeField]
+    //private List
 
     // Start is called before the first frame update
     void Start()
