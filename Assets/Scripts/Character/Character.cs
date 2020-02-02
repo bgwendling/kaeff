@@ -93,10 +93,10 @@ public class Character : MonoBehaviour
 		foreach (char c in text)
 		{
 			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
-			yield return new WaitForSeconds(0.007f);
+			yield return new WaitForSeconds(0.07f);
 		}
 		var wt = (float)System.Math.Ceiling(text.Length / 20f);
-		yield return new WaitForSeconds(0);
+		yield return new WaitForSeconds(wt);
 		dialogueHandler.SetDialogue("");
 		talking = false;
 		dialogueObject.SetActive(false);
