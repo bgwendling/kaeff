@@ -23,6 +23,11 @@ public class DialogueHandler : MonoBehaviour
 		this.dialogueText.text = dialogueText;
 	}
 
+    public string GetDialogue()
+    {
+		return dialogueText.text;
+    }
+
 	/// <summary>
 	/// When an answer button is clicked
 	/// </summary>

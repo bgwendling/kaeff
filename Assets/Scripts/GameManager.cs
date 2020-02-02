@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         dialogueRoot = getParent(getParent(dialogue));
         dialogueRoot.SetActive(false);
+        dialogue.text = "";
     }
     private void initializeCustomers()
     {

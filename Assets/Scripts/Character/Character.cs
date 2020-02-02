@@ -28,6 +28,7 @@ public class Character : MonoBehaviour
 			dialogueObject.SetActive(true);
 			foreach (Entry statement in speech.statements)
 			{
+				dialogueObject.SetActive(true);
 				if (System.Enum.TryParse(statement.moodChange.ToLower().Trim(), out Pose pose))
 				{
 					changePose(pose);
@@ -39,9 +40,14 @@ public class Character : MonoBehaviour
 				
 				if (statement.choice.Count == 0)
 				{
-					dialogueHandler.SetDialogue(statement.text);
-					var wt = (float)System.Math.Ceiling(statement.text.Length / 10f);
+                    foreach(char c in statement.text)
+                    {
+						dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
+						yield return new WaitForSeconds(0.07f);
+                    }
+					var wt = (float)System.Math.Ceiling(statement.text.Length / 20f);
 					yield return new WaitForSeconds(wt);
+					dialogueHandler.SetDialogue("");
 				}
 				else
 				{
@@ -55,6 +61,9 @@ public class Character : MonoBehaviour
 
 					dialogueHandler.SetQuestions(answerStrings, answerValues);
 				}
+				dialogueObject.SetActive(false);
+				//  Wait a bit before the next text
+				yield return new WaitForSeconds(1.5f);
 			}
 		}
 		else
