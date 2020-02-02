@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> customers;
 
+    [SerializeField]
+    private AudioSource musicPlayer;
+    [SerializeField]
+    private List<AudioClip> musicClips = new List<AudioClip>();
+
     private int? nextCharacter;
 
     private Character activeCharacter;
@@ -57,6 +62,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void RandomizeMusic()
+    {
+        musicPlayer.clip = musicClips[Random.Range(0, musicClips.Count)];
+    }
+
     private void initializeAndHideDialogue()
     {
         dialogueRoot = getParent(getParent(dialogue));
@@ -72,6 +82,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
         if (!talking)
         {
             nextCharacter = nextCharacter ?? Random.Range(0, customers.Count);
