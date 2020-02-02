@@ -18,10 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Text dialogue;
     private GameObject dialogueRoot;
-    private int dialogueIndex = -1;
-    private float timeLimit = 0;
-    private float timeSinceLast = 0;
-    Speech speech = null;
     private bool talking;
     
     [SerializeField]
@@ -54,51 +50,26 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        initializeCustomers();
         initializeAndHideDialogue();
+        initializeCustomers();
         CurrencyView.text = currencyPrefix + " " + currency.ToString("c2");
         DontDestroyOnLoad(gameObject);
     }
 
 
-    //private async Task progress()
-    //{
-    //    Speech s = activeCharacter.talk();
-    //    foreach(Entry statement in s.statements){
-    //        dialogue.text = statement.text;
-    //        dialogueRoot.SetActive(true);
-    //        var wt = System.Math.Ceiling(statement.text.Length / 10f);
-            
-    //        //wait 20 seconds
-    //        //dialogueRoot.SetActive(false);
-    //    }
-    //    return Task.CompletedTask;
-    //}
-
-    //dirty hack
-    private void Update()
+    IEnumerator progress()
     {
-        if (talking)
-        {
-            timeSinceLast += Time.deltaTime;
-            if (timeSinceLast >= timeLimit)
-            {
-                if (speech == null)
-                {
-                    speech = activeCharacter.talk();
-                }
-                dialogueRoot.SetActive(true);
-                dialogue.text = speech.statements[++dialogueIndex].text;
-                timeLimit = dialogue.text.Length / 5f;
-                if (dialogueIndex == speech.statements.Count)
-                {
-                    talking = false;
-                    timeSinceLast = 0;
-                    dialogueIndex = -1;
-                    timeLimit = 0;
-                }
-            }
+        dialogueRoot.SetActive(true);
+        Speech s = activeCharacter.talk();
+        foreach(Entry statement in s.statements){
+            dialogue.text = statement.text;
+            var wt = (float)System.Math.Ceiling(statement.text.Length / 10f);
+            yield return new WaitForSeconds(wt);
+            //wait 20 seconds
+            //dialogueRoot.SetActive(false);
         }
+        talking = false;
+        yield return null;
     }
 
     private void initializeAndHideDialogue()
@@ -113,13 +84,13 @@ public class GameManager : MonoBehaviour
 
     private void updateActiveCharacter(GameObject obj)
     {
+        activeCharacter = obj.GetComponent<Character>();
         foreach (GameObject o in customers)
         {
             o.SetActive(false);
         }
         obj.SetActive(true);
-        talking = true;
-        activeCharacter = customers[0].GetComponent<Character>();
+        StartCoroutine(progress());
     }
 
     public void AddToCurrency(float ammount)
