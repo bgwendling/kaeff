@@ -19,10 +19,16 @@ public class Character : MonoBehaviour
 	private int lastSpeech = 0;
 	private int? nextSpeech = null;
 
+	private bool talking = false;
+
+	private DialogueHandler stolenDialogueHandler;
+
 	public IEnumerator Talk(GameObject dialogueObject)
 	{
 		CoffeeWishes.Clear();
 		DialogueHandler dialogueHandler = dialogueObject.GetComponent<DialogueHandler>();
+		if (stolenDialogueHandler == null)
+			stolenDialogueHandler = dialogueHandler;
 		Speech speech = behaviour.speeches?[nextSpeech ?? Random.Range(0, behaviour.speeches.Count - 1)];
 		if (speech != null)
 		{
@@ -41,14 +47,7 @@ public class Character : MonoBehaviour
 				
 				if (statement.choice.Count == 0)
 				{
-                    foreach(char c in statement.text)
-                    {
-						dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
-						yield return new WaitForSeconds(0.07f);
-                    }
-					var wt = (float)System.Math.Ceiling(statement.text.Length / 20f);
-					yield return new WaitForSeconds(wt);
-					dialogueHandler.SetDialogue("");
+						yield return Say(statement.text, dialogueHandler);
 				}
 				else
 				{
@@ -79,6 +78,27 @@ public class Character : MonoBehaviour
 
 	//return behaviour.speeches[lastSpeech++];
 
+        private Coroutine Say(string text, DialogueHandler dialogueHandler)
+    {
+		return StartCoroutine(populateSpeechBubble(text, dialogueHandler));
+    }
+
+        private IEnumerator populateSpeechBubble(string text, DialogueHandler dialogueHandler)
+    {
+		if (talking)
+			yield break;
+		talking = true;
+		foreach (char c in text)
+		{
+			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
+			yield return new WaitForSeconds(0.007f);
+		}
+		var wt = (float)System.Math.Ceiling(text.Length / 20f);
+		yield return new WaitForSeconds(0);
+		dialogueHandler.SetDialogue("");
+		talking = false;
+	}
+
 
 	public void Awake()
 	{
@@ -108,6 +128,7 @@ public class Character : MonoBehaviour
 			GameManager.Instance.AddToCurrency(CoffeeWishes[currentCoffeeWishIndex].payment);
 			gameObject.SetActive(false);
 			gameObject.SetActive(true);
+			Say("Thanks, exactly what I didn't order", stolenDialogueHandler);
 
 		}
 	}
