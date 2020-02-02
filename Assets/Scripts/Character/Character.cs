@@ -95,7 +95,7 @@ public class Character : MonoBehaviour
 			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
 			yield return new WaitForSeconds(0.07f);
 		}
-		var wt = (float)System.Math.Ceiling(text.Length / 20f);
+		var wt = (float)System.Math.Ceiling(text.Length / 30f);
 		yield return new WaitForSeconds(wt);
 		dialogueHandler.SetDialogue("");
 		talking = false;
