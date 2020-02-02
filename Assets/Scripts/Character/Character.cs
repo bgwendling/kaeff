@@ -82,14 +82,14 @@ public class Character : MonoBehaviour
 		}
 
 		dialogueObject.SetActive(false);
-		yield return null;
 		CoffeeWishes.Add(new CoffeeWish { coffeeType = typeof(BlackCoffee), payment = 4.20f });
 		cup.SetActive(true);
+		yield return null;
 	}
 
 	//return behaviour.speeches[lastSpeech++];
 
-        private Coroutine Say(string text, DialogueHandler dialogueHandler, GameObject dialogueObject)
+	private Coroutine Say(string text, DialogueHandler dialogueHandler, GameObject dialogueObject)
     {
 		return StartCoroutine(populateSpeechBubble(text, dialogueHandler, dialogueObject));
     }

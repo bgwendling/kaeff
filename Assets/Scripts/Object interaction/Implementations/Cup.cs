@@ -11,7 +11,7 @@ public class Cup : MonoBehaviour, IDraggable
 
     public ICoffee Coffee { get; set; }
 
-    private void Start()
+    private void Awake()
     {
         originalPosition = transform.position;
     }
