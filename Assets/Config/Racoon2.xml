@@ -19,12 +19,16 @@
         </entry>
         <entry>
           <moodChange>NEUTRAL</moodChange>
-          <text>I'm itching so hard for a cup right now. I’ve been up all night researching Aristotle, who’s is really creepy by the way, in case you were wondering, and I’m so tired I literally can’t think of anything except how terrible he is and how college is equally terrible.</text>
-          <choice>
+          <text>I'm itching so hard for a cup right now. I’ve been up all night researching Aristotle, who’s is really creepy by the way...</text>
+        </entry>
+        <!--<entry>
+          <moodChange>NEUTRAL</moodChange>
+          <text>... In case you were wondering, and I’m so tired I literally can’t think of anything except how terrible he is and how college is equally terrible.</text>
+          --><!--<choice>
             <option result="1">You should drop out, this doesn’t sound good for you.</option>
             <option result="2">Stay in school. It's only temorary.</option>
-          </choice>
-        </entry>
+          </choice>--><!--
+        </entry>-->
       </statements>
     </speech>
     <speech id="1">

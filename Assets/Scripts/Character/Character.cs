@@ -72,7 +72,7 @@ public class Character : MonoBehaviour
                         answerStrings[i] = statement.choice[i].value;
                         answerValues[i] = statement.choice[i].result;
                     }
-
+                    yield return Say(statement.text, dialogueHandler, dialogueObject);
                     dialogueHandler.SetQuestions(answerStrings, answerValues);
                 }
             }
@@ -174,7 +174,7 @@ public class Character : MonoBehaviour
             {
                 foreach (Entry statement in speech.statements)
                 {
-                    if (System.Enum.TryParse(statement.moodChange.ToLower().Trim(), out Pose poseks))
+                    if (System.Enum.TryParse(statement.moodChange?.ToLower().Trim(), out Pose poseks))
                     {
                         changePose(poseks);
                     }

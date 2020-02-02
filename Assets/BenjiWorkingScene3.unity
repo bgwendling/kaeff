@@ -1598,7 +1598,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bb7ce3194f3f1e84189dfaf162b88f02, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 44215fa09bc6a4ebc87cbb48da75c9a7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2135,6 +2135,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5170610483849537591, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610483849537591, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_Text
+      value: This is some really really really cool placeholder text and stuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610483849537591, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610483849537591, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610483849537591, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610483849537592, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610483849537592, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610484049274223, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 179
+      objectReference: {fileID: 0}
     - target: {fileID: 5170610484225341188, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2245,6 +2285,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: IngameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5170610484533622903, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610484962098724, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -245
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610484962098724, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -401.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610485316531439, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ac30b49a1cde46847811d7855c2c2555,
+        type: 3}
+    - target: {fileID: 5170610485316531439, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610485316531440, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2068055
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170610485316531440, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.175
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7cd8a7c9dd0c4c4faf81cc71a572bd2, type: 3}
 --- !u!1001 &5915167821857213243
@@ -2329,6 +2405,11 @@ PrefabInstance:
       propertyPath: talkSound3
       value: 
       objectReference: {fileID: 8300000, guid: 1cdb8bce8173140258ecaf1dfe6df46f, type: 3}
+    - target: {fileID: 8678645199877248422, guid: e0918ac990649c445a875e884ebb1e26,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 4900000, guid: d5bfdb1ba8cabc84eaabdbb28af6033c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0918ac990649c445a875e884ebb1e26, type: 3}
 --- !u!1001 &8571605205269769112

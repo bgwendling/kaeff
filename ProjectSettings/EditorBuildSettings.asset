@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/BenjiWorkingScene3.unity
+    guid: b9b883290b77d224ea92fa46d4136d6e
   m_configObjects: {}
