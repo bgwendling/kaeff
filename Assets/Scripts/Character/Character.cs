@@ -115,7 +115,7 @@ public class Character : MonoBehaviour
 				audioSource.Play();
 			}
 			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(0.08f);
 			audioSource.Stop();
 		}
 		var wt = (float)System.Math.Ceiling(text.Length / 30f);
