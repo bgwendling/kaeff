@@ -115,14 +115,18 @@ public class Character : MonoBehaviour
 			}
 			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
 			yield return new WaitForSeconds(0.08f);
+			if (c.Equals('.') || c.Equals('?') || c.Equals('!'))
+			{
+				yield return new WaitForSeconds(0.7f);
+			}
 			audioSource.Stop();
 		}
-		var wt = (float)System.Math.Ceiling(text.Length / 30f);
+		var wt = (float)System.Math.Ceiling(text.Length / 60f);
 		yield return new WaitForSeconds(wt);
 		dialogueHandler.SetDialogue("");
 		talking = false;
 		dialogueObject.SetActive(false);
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(0.6f);
 	}
 
 
