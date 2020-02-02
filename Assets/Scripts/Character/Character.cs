@@ -23,8 +23,9 @@ public class Character : MonoBehaviour
 
 	private DialogueHandler stolenDialogueHandler;
 
-	public IEnumerator Talk(GameObject dialogueObject)
+	public IEnumerator Talk(GameObject dialogueObject, GameObject cup)
 	{
+		cup.SetActive(false);
 		CoffeeWishes.Clear();
 		DialogueHandler dialogueHandler = dialogueObject.GetComponent<DialogueHandler>();
 		if (stolenDialogueHandler == null)
@@ -74,6 +75,7 @@ public class Character : MonoBehaviour
 		dialogueObject.SetActive(false);
 		yield return null;
 		CoffeeWishes.Add(new CoffeeWish { coffeeType = typeof(BlackCoffee), payment = 4.20f });
+		cup.SetActive(true);
 	}
 
 	//return behaviour.speeches[lastSpeech++];
@@ -127,7 +129,6 @@ public class Character : MonoBehaviour
 		{
 			GameManager.Instance.AddToCurrency(CoffeeWishes[currentCoffeeWishIndex].payment);
 			gameObject.SetActive(false);
-			gameObject.SetActive(true);
 			Say("Thanks, exactly what I didn't order", stolenDialogueHandler);
 
 		}

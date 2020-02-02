@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        cup.SetActive(false);
         initializeAndHideDialogue();
         initializeCustomers();
         CurrencyView.text = currencyPrefix + " " + currency.ToString("c2");
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
             o.SetActive(false);
         }
         obj.SetActive(true);
-        StartCoroutine(activeCharacter.Talk(dialogueRoot));
+        StartCoroutine(activeCharacter.Talk(dialogueRoot, cup));
     }
 
     public void AddToCurrency(float ammount)
