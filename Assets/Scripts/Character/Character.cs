@@ -21,6 +21,7 @@ public class Character : MonoBehaviour
 
 	public IEnumerator Talk(GameObject dialogueObject)
 	{
+		CoffeeWishes.Clear();
 		DialogueHandler dialogueHandler = dialogueObject.GetComponent<DialogueHandler>();
 		Speech speech = behaviour.speeches?[nextSpeech ?? Random.Range(0, behaviour.speeches.Count - 1)];
 		if (speech != null)
@@ -73,6 +74,7 @@ public class Character : MonoBehaviour
 
 		dialogueObject.SetActive(false);
 		yield return null;
+		CoffeeWishes.Add(new CoffeeWish { coffeeType = typeof(BlackCoffee), payment = 4.20f });
 	}
 
 	//return behaviour.speeches[lastSpeech++];
@@ -90,7 +92,6 @@ public class Character : MonoBehaviour
 
 	public void Start()
 	{
-		CoffeeWishes.Add(new CoffeeWish { coffeeType = typeof(BlackCoffee), payment = 4.20f });
 	}
 
 	public void Update()
@@ -100,6 +101,8 @@ public class Character : MonoBehaviour
 
 	public void OnReceiveObject(IDraggable draggable, GameObject gameObject)
 	{
+		if (CoffeeWishes.Count == 0)
+			return;
 		if (draggable.Coffee?.GetType() == CoffeeWishes[currentCoffeeWishIndex].coffeeType)
 		{
 			GameManager.Instance.AddToCurrency(CoffeeWishes[currentCoffeeWishIndex].payment);
