@@ -127,20 +127,17 @@ public class Character : MonoBehaviour
 	{
 		if (CoffeeWishes.Count == 0)
 		{
-			Debug.Log("1");
 			Say("I haven't ordered yet", stolenDialogueHandler, stolenDialogueObject);
 			return;
 		}
 		if (draggable.Coffee == null)
 		{
-			Debug.Log("2");
 			Say("There's no coffee", stolenDialogueHandler, stolenDialogueObject);
 			return;
 		}
 
 		if (draggable.Coffee?.GetType() == CoffeeWishes[currentCoffeeWishIndex].coffeeType)
 		{
-			Debug.Log("3");
 			GameManager.Instance.AddToCurrency(CoffeeWishes[currentCoffeeWishIndex].payment);
 			gameObject.SetActive(false);
 			Say("Thanks, exactly what I didn't order", stolenDialogueHandler, stolenDialogueObject);
