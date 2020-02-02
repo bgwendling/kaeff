@@ -24,6 +24,13 @@ public class Character : MonoBehaviour
 	private DialogueHandler stolenDialogueHandler;
 	private GameObject stolenDialogueObject;
 
+
+	private AudioSource audioSource;
+	[SerializeField]
+	private AudioClip talkSound1;
+	[SerializeField]
+	private AudioClip talkSound2;
+
 	public IEnumerator Talk(GameObject dialogueObject, GameObject cup)
 	{
 		cup.SetActive(false);
@@ -92,10 +99,21 @@ public class Character : MonoBehaviour
 		dialogueObject.SetActive(true);
 		foreach (char c in text)
 		{
+            if(audioSource.clip == talkSound1)
+            {
+				audioSource.clip = talkSound2;
+            } else
+            {
+				audioSource.clip = talkSound1;
+            }
+			if (audioSource != null)
+			{
+				audioSource.Play();
+			}
 			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
-			yield return new WaitForSeconds(0.07f);
+			yield return new WaitForSeconds(0.04f);
 		}
-		var wt = (float)System.Math.Ceiling(text.Length / 20f);
+		var wt = (float)System.Math.Ceiling(text.Length / 30f);
 		yield return new WaitForSeconds(wt);
 		dialogueHandler.SetDialogue("");
 		talking = false;
@@ -107,6 +125,7 @@ public class Character : MonoBehaviour
 	public void Awake()
 	{
 		var behaviourSerializer = new XmlSerializer(typeof(Behaviour));
+		audioSource = GetComponent<AudioSource>();
 
 		using (TextReader reader = new StringReader(config.ToString()))
 		{
@@ -127,20 +146,17 @@ public class Character : MonoBehaviour
 	{
 		if (CoffeeWishes.Count == 0)
 		{
-			Debug.Log("1");
 			Say("I haven't ordered yet", stolenDialogueHandler, stolenDialogueObject);
 			return;
 		}
 		if (draggable.Coffee == null)
 		{
-			Debug.Log("2");
 			Say("There's no coffee", stolenDialogueHandler, stolenDialogueObject);
 			return;
 		}
 
 		if (draggable.Coffee?.GetType() == CoffeeWishes[currentCoffeeWishIndex].coffeeType)
 		{
-			Debug.Log("3");
 			GameManager.Instance.AddToCurrency(CoffeeWishes[currentCoffeeWishIndex].payment);
 			gameObject.SetActive(false);
 			Say("Thanks, exactly what I didn't order", stolenDialogueHandler, stolenDialogueObject);
