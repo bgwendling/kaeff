@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Xml.Serialization;
 using System.IO;
 using UnityEngine.UI;
+using System;
 
 public class Character : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class Character : MonoBehaviour
 	private AudioClip talkSound1;
 	[SerializeField]
 	private AudioClip talkSound2;
+	[SerializeField]
+	private AudioClip talkSound3;
 
 	public IEnumerator Talk(GameObject dialogueObject, GameObject cup)
 	{
@@ -40,7 +43,7 @@ public class Character : MonoBehaviour
 			stolenDialogueHandler = dialogueHandler;
 		if (stolenDialogueObject == null)
 			stolenDialogueObject = dialogueObject;
-		Speech speech = behaviour.speeches?[nextSpeech ?? Random.Range(0, behaviour.speeches.Count - 1)];
+		Speech speech = behaviour.speeches?[nextSpeech ?? UnityEngine.Random.Range(0, behaviour.speeches.Count)];
 		if (speech != null)
 		{
 			foreach (Entry statement in speech.statements)
@@ -98,15 +101,22 @@ public class Character : MonoBehaviour
 			yield break;
 		talking = true;
 		dialogueObject.SetActive(true);
-		if (audioSource != null && !audioSource.isPlaying)
-		{
-			audioSource.clip = talkSound2;
-			audioSource.Play();
-		}
 		foreach (char c in text)
 		{
+			if (audioSource != null && !audioSource.isPlaying && Char.IsLetter(c))
+			{
+				int randomClip = UnityEngine.Random.Range(0, 3);
+                if(randomClip == 0)
+				    audioSource.clip = talkSound1;
+				if (randomClip == 1)
+					audioSource.clip = talkSound2;
+				if (randomClip == 2)
+					audioSource.clip = talkSound3;
+				audioSource.Play();
+			}
 			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
-			yield return new WaitForSeconds(0.04f);
+			yield return new WaitForSeconds(0.1f);
+			audioSource.Stop();
 		}
 		var wt = (float)System.Math.Ceiling(text.Length / 30f);
 		yield return new WaitForSeconds(wt);
