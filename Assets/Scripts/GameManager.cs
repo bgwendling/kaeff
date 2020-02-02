@@ -84,7 +84,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            musicPlayer.clip = musicClips[musicClips.IndexOf(musicPlayer.clip) == 0 ? 1 : 0];
+            musicPlayer.loop = true;
+            musicPlayer.Play();
+        }
         if (!talking)
         {
             nextCharacter = nextCharacter ?? Random.Range(0, customers.Count);
