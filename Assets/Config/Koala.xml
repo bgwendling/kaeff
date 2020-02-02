@@ -1,0 +1,93 @@
+<Behaviour Name="KOALA" defaultMood="HAPPY">
+  <speech id="0">
+    <statements>
+      <entry>
+        <moodChange>HAPPY</moodChange>
+        <text> I’m on my way to my grand children. It’s been quite a while since I’ve seen them. </text>
+      </entry>
+      <entry>
+        <moodChange>SAD</moodChange>
+        <text>Months, even. They don’t visit as much now that they’re older. But, I understand them. When I was that age I was always on the move, scurrying around. Things are slower now a days for me, but I don’t mind. You get to enjoy every moment for what it’s truly worth. </text>
+      </entry>
+      <entry>
+        <moodChange>HAPPY</moodChange>
+        <text>I have all the time I need, so I can take long walks, or play the piano, or spend a few hours in a coffee shop if I want to. Of course I can’t today, because I’m seeing my grand children, but usually I can.</text>
+      </entry>
+      <entry>
+        <choice>
+          <option result="1">
+            That sounds so nice. I hope you enjoy yourself, family is important.
+          </option>
+          <option result="2">I’ve never been a family person, personally. I think it’s easier to keep my distance.</option>
+        </choice>
+      </entry>
+    </statements>
+  </speech>
+  <Speech id="1">
+    <statements>
+      <entry>
+        <text>
+          Thank you. I agree. Sometimes it’s hard to see it, but… A good family is important. And it’s something everyone needs.
+        </text>
+      </entry>
+    </statements>
+  </Speech>
+  <Speech id="2">
+    <statements>
+      <entry>
+        <moodChange>SAD</moodChange>
+        <text>Yes. I suppose. .</text>
+      </entry>
+    </statements>
+  </Speech>
+  <speech>
+    <statements>
+      <!-- Hver entry her er ment å tilsvare en "snakkeboble"-->
+      <entry>
+        <moodChange>HAPPY</moodChange>
+        <text> I’ve played a lot of piano recently. I forget a lot of things, names and places and faces, but music always stays. It’s in my fingers, my blood. Our family has always cared about music, and played it together. </text>
+      </entry>
+      <entry>
+        <text>My youngest grandkid has started playing the violin. It sounds horrific, but I think it’s important to be positive and encourage her. Perhaps she’ll become world famous someday, because there was someone there who supported her.  </text>
+      </entry>
+      <entry>
+        <moodChange>SAD</moodChange>
+        <text>I was a bit… absent when it came to my own children. But I want to change that, and be there for my entire family. It’s better late than never, right?</text>
+        <choice>
+          <option result="3">Absolutely. I think that’s very brave of you, and it could mean a lot to those you love.</option>
+          <option result="4">It sounds like you’re ripping up old wounds. It’s better to let it go.</option>
+        </choice>
+      </entry>
+    </statements>
+    </Speech>
+    <speech id="3">
+      <statements>
+        <entry>
+          <moodChange>HAPPY</moodChange>
+          <text>You think so? Alright, I’ll try. I’m a bit nervous, not going to lie, but I think we need this.</text>
+        </entry>
+      </statements>
+    </speech>
+    <speech id="4">
+      <text>I didn’t think of it like that… Yeah. Perhaps you’re right.</text>
+    </speech>
+    <speech id="5">
+      <statements>
+        <entry>
+          <moodChange>SAD</moodChange>
+          <text>I talked to my son, about… Everything that happened. It’s the first time I’ve cried in years. Same with him. I apologized for all the times I wasn’t there, when I didn’t love him the way he needed to be loved, for the times I didn’t see his pain.</text>
+        </entry>
+        <entry>
+          <moodChange>SAD</moodChange>
+          <text>I think that’s what we both needed, he seems so much more present when we speak over the phone now. </text>
+        </entry>
+        <entry>
+          <moodChange>HAPPY</moodChange>
+          <text>I can hear the smiles in his voice. I know it’s a long journey, you have to do it step for step, and everything isn’t fixed in one conversation, but I think our healing has begun.</text>
+        </entry>
+        <entry>
+          <text>Thank you.</text>
+        </statements>
+    </speech>
+    </behaviour>
+  

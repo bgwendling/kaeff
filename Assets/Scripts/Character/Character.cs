@@ -17,7 +17,6 @@ public class Character : MonoBehaviour
 	[SerializeField]
 	private PoseGameObject[] poseGameObjects = null;
 
-	private int lastSpeech = 0;
 	private int? nextSpeech = 0;
 
 	private bool talking = false;
