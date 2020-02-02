@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private Character activeCharacter;
 
+    bool talking = true;
     [SerializeField]
     private GameObject cup;
 
@@ -69,8 +70,22 @@ public class GameManager : MonoBehaviour
         updateActiveCharacter(customers[nextCharacter ?? Random.Range(0, customers.Count)]);
     }
 
+    private void Update()
+    {
+        if (!talking)
+        {
+            nextCharacter = nextCharacter ?? Random.Range(0, customers.Count);
+            if (nextCharacter != null && nextCharacter < customers.Count)
+            {
+                StartCoroutine(WaitForSeconds(Random.Range(5f, 20f)));
+                updateActiveCharacter(customers[(int)nextCharacter]);
+            }
+        }
+    }
+
     private void updateActiveCharacter(GameObject obj)
     {
+        talking = true;
         nextCharacter = null;
         activeCharacter = obj.GetComponent<Character>();
         foreach (GameObject o in customers)
@@ -79,11 +94,11 @@ public class GameManager : MonoBehaviour
         }
         obj.SetActive(true);
         StartCoroutine(activeCharacter.Talk(dialogueRoot, cup));
-        if(nextCharacter != null && nextCharacter < customers.Count)
-        {
-            StartCoroutine(WaitForSeconds(Random.Range(5f, 20f)));
-            updateActiveCharacter(customers[(int)nextCharacter]);
-        }
+    }
+
+    public void SetTalking(bool talking)
+    {
+        this.talking = talking;
     }
 
     public void AddToCurrency(float ammount)

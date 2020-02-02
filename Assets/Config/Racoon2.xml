@@ -2,14 +2,14 @@
   <speeches>
     <speech id="0">
       <statements>
-        <entry>
+        <!--<entry>
           <moodChange>NEUTRAL</moodChange>
           <text> I have an assignment due tomorrow. You know what it’s about? Freakin’ Aristotle.</text>
         </entry>
         <entry>
           <moodChange>MAD</moodChange>
           <text>He is such a tool, you know that? I’m tired of this fetishization of greek philosophers like they’re these infallible perfect demi-gods, they’re all dumb self righteous jerks.</text>
-        </entry>
+        </entry>-->
         <entry>
           <moodChange>SAD</moodChange>
           <text>
