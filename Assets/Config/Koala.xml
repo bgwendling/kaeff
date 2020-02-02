@@ -1,4 +1,5 @@
-<Behaviour Name="KOALA" defaultMood="HAPPY">
+<behaviour Name="KOALA" defaultMood="HAPPY">
+    <speeches>
   <speech id="0">
     <statements>
       <entry>
@@ -59,7 +60,7 @@
         </choice>
       </entry>
     </statements>
-    </Speech>
+    </speech>
     <speech id="3">
       <statements>
         <entry>
@@ -87,7 +88,9 @@
         </entry>
         <entry>
           <text>Thank you.</text>
+                    </entry>
         </statements>
     </speech>
+        </speeches>
     </behaviour>
   

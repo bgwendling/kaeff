@@ -82,11 +82,11 @@ public class Character : MonoBehaviour
             Debug.Log("Character without speech");
         }
 
-        dialogueObject.SetActive(false);
-        yield return null;
-        CoffeeWishes.Add(new CoffeeWish { coffeeType = typeof(BlackCoffee), payment = 4.20f });
-        cup.SetActive(true);
-    }
+		dialogueObject.SetActive(false);
+		CoffeeWishes.Add(new CoffeeWish { coffeeType = typeof(BlackCoffee), payment = 4.20f });
+		cup.SetActive(true);
+		yield return null;
+	}
 
     //return behaviour.speeches[lastSpeech++];
 
@@ -97,34 +97,38 @@ public class Character : MonoBehaviour
 
     private IEnumerator populateSpeechBubble(string text, DialogueHandler dialogueHandler, GameObject dialogueObject)
     {
-        if (talking)
-            yield break;
-        talking = true;
-        dialogueObject.SetActive(true);
-        foreach (char c in text)
-        {
-            if (audioSource != null && !audioSource.isPlaying && Char.IsLetter(c))
-            {
-                int randomClip = UnityEngine.Random.Range(0, 3);
-                if (randomClip == 0)
-                    audioSource.clip = talkSound1;
-                if (randomClip == 1)
-                    audioSource.clip = talkSound2;
-                if (randomClip == 2)
-                    audioSource.clip = talkSound3;
-                audioSource.Play();
-            }
-            dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
-            yield return new WaitForSeconds(0.08f * textSpeedModifier);
-            audioSource.Stop();
-        }
-        var wt = (float)System.Math.Ceiling(text.Length / 30f);
-        yield return new WaitForSeconds(wt);
-        dialogueHandler.SetDialogue("");
-        talking = false;
-        dialogueObject.SetActive(false);
-        yield return new WaitForSeconds(1.5f);
-    }
+		if (talking)
+			yield break;
+		talking = true;
+		dialogueObject.SetActive(true);
+		foreach (char c in text)
+		{
+			if (audioSource != null && !audioSource.isPlaying && Char.IsLetter(c))
+			{
+				int randomClip = UnityEngine.Random.Range(0, 3);
+                if(randomClip == 0)
+				    audioSource.clip = talkSound1;
+				if (randomClip == 1)
+					audioSource.clip = talkSound2;
+				if (randomClip == 2)
+					audioSource.clip = talkSound3;
+				audioSource.Play();
+			}
+			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
+			yield return new WaitForSeconds(0.08f);
+			if (c.Equals('.') || c.Equals('?') || c.Equals('!'))
+			{
+				yield return new WaitForSeconds(0.7f);
+			}
+			audioSource.Stop();
+		}
+		var wt = (float)System.Math.Ceiling(text.Length / 60f);
+		yield return new WaitForSeconds(wt);
+		dialogueHandler.SetDialogue("");
+		talking = false;
+		dialogueObject.SetActive(false);
+		yield return new WaitForSeconds(0.6f);
+	}
 
 
     public void Awake()
