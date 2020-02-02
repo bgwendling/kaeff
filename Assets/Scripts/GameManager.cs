@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     private GameObject activeCharacterObject;
 	private Character activeCharacter;
 
+    [SerializeField]
+    private GameObject cup;
+
     //[SerializeField]
     //private List
 
