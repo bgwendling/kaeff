@@ -144,6 +144,10 @@ public class Character : MonoBehaviour
 			GameManager.Instance.AddToCurrency(CoffeeWishes[currentCoffeeWishIndex].payment);
 			gameObject.SetActive(false);
 			Say("Thanks, exactly what I didn't order", stolenDialogueHandler, stolenDialogueObject);
+			if (System.Enum.TryParse("drinking".ToLower().Trim(), out Pose pose))
+			{
+				changePose(pose);
+			}
 
 		}
 	}
