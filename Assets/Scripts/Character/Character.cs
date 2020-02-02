@@ -22,6 +22,7 @@ public class Character : MonoBehaviour
 	private bool talking = false;
 
 	private DialogueHandler stolenDialogueHandler;
+	private GameObject stolenDialogueObject;
 
 	public IEnumerator Talk(GameObject dialogueObject, GameObject cup)
 	{
@@ -30,10 +31,11 @@ public class Character : MonoBehaviour
 		DialogueHandler dialogueHandler = dialogueObject.GetComponent<DialogueHandler>();
 		if (stolenDialogueHandler == null)
 			stolenDialogueHandler = dialogueHandler;
+		if (stolenDialogueObject == null)
+			stolenDialogueObject = dialogueObject;
 		Speech speech = behaviour.speeches?[nextSpeech ?? Random.Range(0, behaviour.speeches.Count - 1)];
 		if (speech != null)
 		{
-			dialogueObject.SetActive(true);
 			foreach (Entry statement in speech.statements)
 			{
 				dialogueObject.SetActive(true);
@@ -48,7 +50,7 @@ public class Character : MonoBehaviour
 				
 				if (statement.choice.Count == 0)
 				{
-						yield return Say(statement.text, dialogueHandler);
+						yield return Say(statement.text, dialogueHandler, dialogueObject);
 				}
 				else
 				{
@@ -62,9 +64,6 @@ public class Character : MonoBehaviour
 
 					dialogueHandler.SetQuestions(answerStrings, answerValues);
 				}
-				dialogueObject.SetActive(false);
-				//  Wait a bit before the next text
-				yield return new WaitForSeconds(1.5f);
 			}
 		}
 		else
@@ -80,16 +79,17 @@ public class Character : MonoBehaviour
 
 	//return behaviour.speeches[lastSpeech++];
 
-        private Coroutine Say(string text, DialogueHandler dialogueHandler)
+        private Coroutine Say(string text, DialogueHandler dialogueHandler, GameObject dialogueObject)
     {
-		return StartCoroutine(populateSpeechBubble(text, dialogueHandler));
+		return StartCoroutine(populateSpeechBubble(text, dialogueHandler, dialogueObject));
     }
 
-        private IEnumerator populateSpeechBubble(string text, DialogueHandler dialogueHandler)
+        private IEnumerator populateSpeechBubble(string text, DialogueHandler dialogueHandler, GameObject dialogueObject)
     {
 		if (talking)
 			yield break;
 		talking = true;
+		dialogueObject.SetActive(true);
 		foreach (char c in text)
 		{
 			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
@@ -99,6 +99,8 @@ public class Character : MonoBehaviour
 		yield return new WaitForSeconds(0);
 		dialogueHandler.SetDialogue("");
 		talking = false;
+		dialogueObject.SetActive(false);
+		yield return new WaitForSeconds(1.5f);
 	}
 
 
@@ -124,12 +126,24 @@ public class Character : MonoBehaviour
 	public void OnReceiveObject(IDraggable draggable, GameObject gameObject)
 	{
 		if (CoffeeWishes.Count == 0)
+		{
+			Debug.Log("1");
+			Say("I haven't ordered yet", stolenDialogueHandler, stolenDialogueObject);
 			return;
+		}
+		if (draggable.Coffee == null)
+		{
+			Debug.Log("2");
+			Say("There's no coffee", stolenDialogueHandler, stolenDialogueObject);
+			return;
+		}
+
 		if (draggable.Coffee?.GetType() == CoffeeWishes[currentCoffeeWishIndex].coffeeType)
 		{
+			Debug.Log("3");
 			GameManager.Instance.AddToCurrency(CoffeeWishes[currentCoffeeWishIndex].payment);
 			gameObject.SetActive(false);
-			Say("Thanks, exactly what I didn't order", stolenDialogueHandler);
+			Say("Thanks, exactly what I didn't order", stolenDialogueHandler, stolenDialogueObject);
 
 		}
 	}
