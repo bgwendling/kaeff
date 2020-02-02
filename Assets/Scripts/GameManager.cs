@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,29 +7,26 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     private static readonly object threadLock = new object();
-    
+
     private float currency = 20.50f;
     [SerializeField]
     private string currencyPrefix = "Cash money flow:";
     [SerializeField]
     private Text CurrencyView;
-    
+
     [SerializeField]
     private Text dialogue;
     private GameObject dialogueRoot;
-    private bool talking;
-    
+
     [SerializeField]
     private List<GameObject> customers;
-    
-    private GameObject activeCharacterObject;
-	private Character activeCharacter;
+
+    private int? nextCharacter;
+
+    private Character activeCharacter;
 
     [SerializeField]
     private GameObject cup;
-
-    //[SerializeField]
-    //private List
 
     // Start is called before the first frame update
     void Start()
@@ -60,9 +56,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-
-
     private void initializeAndHideDialogue()
     {
         dialogueRoot = getParent(getParent(dialogue));
@@ -71,11 +64,14 @@ public class GameManager : MonoBehaviour
     }
     private void initializeCustomers()
     {
-        updateActiveCharacter(customers[0]);
+        if (nextCharacter != null && nextCharacter >= customers.Count)
+            nextCharacter = customers.Count - 1;
+        updateActiveCharacter(customers[nextCharacter ?? Random.Range(0, customers.Count)]);
     }
 
     private void updateActiveCharacter(GameObject obj)
     {
+        nextCharacter = null;
         activeCharacter = obj.GetComponent<Character>();
         foreach (GameObject o in customers)
         {
@@ -83,6 +79,11 @@ public class GameManager : MonoBehaviour
         }
         obj.SetActive(true);
         StartCoroutine(activeCharacter.Talk(dialogueRoot, cup));
+        if(nextCharacter != null && nextCharacter < customers.Count)
+        {
+            StartCoroutine(WaitForSeconds(Random.Range(5f, 20f)));
+            updateActiveCharacter(customers[(int)nextCharacter]);
+        }
     }
 
     public void AddToCurrency(float ammount)
@@ -97,7 +98,12 @@ public class GameManager : MonoBehaviour
         CurrencyView.text = currencyPrefix + " " + currency.ToString("c2");
     }
 
-	public Character GetActiveCharacter() { return activeCharacter; }
+    public void SetNextCharacter(int? characterIndex)
+    {
+        nextCharacter = characterIndex;
+    }
+
+    public Character GetActiveCharacter() { return activeCharacter; }
     private static GameObject getParent(Text obj)
     {
         return obj.transform.parent.gameObject;
@@ -109,4 +115,8 @@ public class GameManager : MonoBehaviour
         return obj.transform.parent.gameObject;
     }
 
+    IEnumerator WaitForSeconds(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+    }
 }
