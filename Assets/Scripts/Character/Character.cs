@@ -46,6 +46,7 @@ public class Character : MonoBehaviour
 			foreach (Entry statement in speech.statements)
 			{
 				dialogueObject.SetActive(true);
+                
 				if (System.Enum.TryParse(statement.moodChange.ToLower().Trim(), out Pose pose))
 				{
 					changePose(pose);
@@ -97,19 +98,13 @@ public class Character : MonoBehaviour
 			yield break;
 		talking = true;
 		dialogueObject.SetActive(true);
+		if (audioSource != null && !audioSource.isPlaying)
+		{
+			audioSource.clip = talkSound2;
+			audioSource.Play();
+		}
 		foreach (char c in text)
 		{
-            if(audioSource.clip == talkSound1)
-            {
-				audioSource.clip = talkSound2;
-            } else
-            {
-				audioSource.clip = talkSound1;
-            }
-			if (audioSource != null)
-			{
-				audioSource.Play();
-			}
 			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
 			yield return new WaitForSeconds(0.04f);
 		}
