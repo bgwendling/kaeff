@@ -7,10 +7,20 @@ public class SimpleCoffeMachine : MonoBehaviour, IMachine
 {
 
     bool busy = false;
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip pouringSound;
+    [SerializeField]
+    private AudioClip readySound;
 
     public bool isBusy()
     {
         return busy;
+    }
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void OnDropObject(GameObject dropped, IDraggable draggable)
@@ -26,19 +36,17 @@ public class SimpleCoffeMachine : MonoBehaviour, IMachine
         Cup cup = dropped.transform.gameObject.GetComponent<Cup>();
         cup.lockCup();
         busy = true;
-        yield return new WaitForSeconds(5.0f);
+        audioSource.clip = pouringSound;
+        audioSource.loop = true;
+        audioSource.Play();
+        yield return new WaitForSeconds(6.0f);
+        audioSource.Stop();
         busy = false;
+        audioSource.loop = false;
+        audioSource.clip = readySound;
+        audioSource.Play();
         cup.unlockCup();
 
-    }
-
- 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
