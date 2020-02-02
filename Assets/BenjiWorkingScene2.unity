@@ -956,6 +956,11 @@ PrefabInstance:
       propertyPath: finishedSound
       value: 
       objectReference: {fileID: 8300000, guid: 5cb1ea2ce1c104531b41280a1851f9eb, type: 3}
+    - target: {fileID: 5289431338060479057, guid: 01cc9dca87e205640a1eae31e4738998,
+        type: 3}
+      propertyPath: readySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5cb1ea2ce1c104531b41280a1851f9eb, type: 3}
     - target: {fileID: 9168357010209441859, guid: 01cc9dca87e205640a1eae31e4738998,
         type: 3}
       propertyPath: m_LocalPosition.x
