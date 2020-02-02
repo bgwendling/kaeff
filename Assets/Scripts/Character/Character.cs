@@ -18,7 +18,7 @@ public class Character : MonoBehaviour
 	private PoseGameObject[] poseGameObjects = null;
 
 	private int lastSpeech = 0;
-	private int? nextSpeech = null;
+	private int? nextSpeech = 0;
 
 	private bool talking = false;
 
@@ -115,7 +115,7 @@ public class Character : MonoBehaviour
 				audioSource.Play();
 			}
 			dialogueHandler.SetDialogue(dialogueHandler.GetDialogue() + c);
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(0.08f);
 			audioSource.Stop();
 		}
 		var wt = (float)System.Math.Ceiling(text.Length / 30f);
@@ -151,7 +151,7 @@ public class Character : MonoBehaviour
 	{
 		if (CoffeeWishes.Count == 0)
 		{
-			Say("I haven't ordered yet", stolenDialogueHandler, stolenDialogueObject);
+			Say("Uhm, I haven't ordered yet", stolenDialogueHandler, stolenDialogueObject);
 			return;
 		}
 		if (draggable.Coffee == null)
@@ -164,7 +164,7 @@ public class Character : MonoBehaviour
 		{
 			GameManager.Instance.AddToCurrency(CoffeeWishes[currentCoffeeWishIndex].payment);
 			gameObject.SetActive(false);
-			Say("Thanks, exactly what I didn't order", stolenDialogueHandler, stolenDialogueObject);
+			Say("Wow, thanks, that's exactly what I DIDN'T order", stolenDialogueHandler, stolenDialogueObject);
 			if (System.Enum.TryParse("drinking".ToLower().Trim(), out Pose pose))
 			{
 				changePose(pose);
