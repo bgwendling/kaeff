@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> customers;
     
     private GameObject activeCharacterObject;
-    private Character activeCharacter;
+	private Character activeCharacter;
 
     //[SerializeField]
     //private List
@@ -57,20 +57,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    IEnumerator progress()
-    {
-        dialogueRoot.SetActive(true);
-        Speech s = activeCharacter.talk();
-        foreach(Entry statement in s.statements){
-            dialogue.text = statement.text;
-            var wt = (float)System.Math.Ceiling(statement.text.Length / 10f);
-            yield return new WaitForSeconds(wt);
-            //wait 20 seconds
-            //dialogueRoot.SetActive(false);
-        }
-        talking = false;
-        yield return null;
-    }
+
 
     private void initializeAndHideDialogue()
     {
@@ -90,7 +77,7 @@ public class GameManager : MonoBehaviour
             o.SetActive(false);
         }
         obj.SetActive(true);
-        StartCoroutine(progress());
+        StartCoroutine(activeCharacter.Talk(dialogueRoot));
     }
 
     public void AddToCurrency(float ammount)
@@ -105,7 +92,7 @@ public class GameManager : MonoBehaviour
         CurrencyView.text = currencyPrefix + " " + currency.ToString("c2");
     }
 
-
+	public Character GetActiveCharacter() { return activeCharacter; }
     private static GameObject getParent(Text obj)
     {
         return obj.transform.parent.gameObject;

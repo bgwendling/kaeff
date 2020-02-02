@@ -3,23 +3,23 @@
     <speech id="1">
         <statements>
             <entry>
-                <moodChange>TIRED</moodChange>
+                <moodChange>neutral</moodChange>
                 <text> I have an assignment due tomorrow. You know what it’s about? Freakin’ Aristotle.</text>
             </entry>
             <entry>
-                <moodChange>ANNOYED</moodChange>
+                <moodChange>mad</moodChange>
                 <text>He is such a tool, you know that? I’m tired of this fetishization of greek philosophers like they’re these infallible perfect demi-gods, they’re all dumb self righteous jerks.</text>
             </entry>
             <entry>
-                <moodChange>LOST</moodChange>
+                <moodChange>sad</moodChange>
                 <text>Why did I even start studying philosophy? Maybe I should drop out.</text>
             </entry>
             <entry>
-                <moodChange>ANNOYED</moodChange>
+                <moodChange>mad</moodChange>
                 <text>But my student debt is already building up, so it would probably be bad. I hate this.</text>
             </entry>
             <entry>
-                <moodChange>TIRED</moodChange> 
+                <moodChange>neutral</moodChange> 
                 <text>Could you give me a triple shot espresso instead of double? I’ve been up all night researching Aristotle, who’s a literal flippin’ pedophile by the way, in case you were wondering, and I’m so tired I literally can’t think of anything except how terrible Aristotle is and how much suffering college is.</text>
             </entry>
         </statements>
